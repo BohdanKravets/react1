@@ -24,34 +24,34 @@ const App = () => {
         setsUsers([...users]);
     }
     let [counter, setCounter] = useState(0);
-    const increment = () => {
-        setCounter(++counter)
+    const changeCounter = (name) => {
+        if(name ==='+1') {
+            setCounter(++counter)
+        }
+        if(name ==='-1') {
+            setCounter(--counter)
+        }
+        if(name ==='reset') {
+            setCounter(0)
+        }
+        if(name ==='+100') {
+            counter += 100
+            setCounter(counter)
+        }
+        if(name ==='-100') {
+            counter -= 100
+            setCounter(counter)
+        }
     }
-    const decrement = () => {
-        setCounter(--counter)
-    }
-    const plusHundred = () => {
-        counter += 100
-        setCounter(counter)
-    }
-    const minusHundred = () => {
-        counter -= 100
-        setCounter(counter)
-    }
-    const reset = () => {
 
-        setCounter(0)
-    }
 
     return <div>
         <div>
             <Counter
+
                 counter={counter}
-                increment={increment}
-                decrement={decrement}
-                reset={reset}
-                plusHundred={plusHundred}
-                minusHundred={minusHundred}
+               changeCounter ={changeCounter}
+
             />
         </div>
         <div>
