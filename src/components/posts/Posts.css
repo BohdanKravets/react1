@@ -4,6 +4,7 @@
 .posts-box{
     border: darkred solid 1px;
     width: fit-content;
+    padding: 10px;
 
 }
 
@@ -11,5 +12,6 @@
     border: red solid 1px;
     width: 400px;
     box-sizing: border-box;
+    padding: 10px;
 
 }
