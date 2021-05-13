@@ -1,14 +1,18 @@
+import './App.css';
+
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     Link
 } from "react-router-dom";
-import Home from "./home/Home";
+import Home from "./components/home/Home";
 import Users from "./components/users/Users";
 import Posts from "./components/posts/Posts";
-import UserDetails from "./userDetails/UserDetails";
+import UserDetails from "./components/userDetails/UserDetails";
 import PostDetails from "./components/postDetails/PostDetails";
+import Comments from "./components/comments/Comments";
+import CommentDetails from "./components/commentDetails/CommentDetails";
 
 export default function App() {
     return (
@@ -19,6 +23,7 @@ export default function App() {
                 <div><Link to={'/users'}>users page</Link></div>
 
                 <div><Link to={'/posts'}>posts page</Link></div>
+                <div><Link to={'/comments'}>comments page</Link></div>
 
                 <hr/>
                 <Switch>
@@ -31,6 +36,8 @@ export default function App() {
 
                     <Route exact path={'/posts'} component={Posts}/>
                     <Route path={'/posts/:id'} component={PostDetails}/>
+                    <Route exact path={'/comments'} component={Comments}/>
+                    <Route path={'/comments/:id'} component={CommentDetails}/>
                 </Switch>
 
                 <hr/>

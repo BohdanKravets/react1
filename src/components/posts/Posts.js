@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import Post from "../../post/Post";
+import Post from "../post/Post";
 
 export default function Posts(props) {
     let {match:{url}} = props;
