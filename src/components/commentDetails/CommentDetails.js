@@ -1,16 +1,19 @@
 import {useEffect, useState} from "react";
+import {getComments} from "../../services/api";
 
 export default function CommentDetails(props) {
     const {match: {params: {id}}} = props;
     let [comment, setComment] = useState(null);
 
+    const commentData = async () => {
+        const resp = await getComments();
+        const findedComment = resp.data.find(item => item.id === +id)
+        setComment(findedComment)
+    }
+
     useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/comments')
-            .then(value => value.json())
-            .then(value => value.find(item => item.id === +id))
-            .then(value => setComment(value))
+       commentData();
     }, [])
-    console.log(comment)
     return (
         <div>
 
