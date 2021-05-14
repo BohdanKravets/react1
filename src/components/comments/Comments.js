@@ -14,6 +14,7 @@ export default function Comments() {
     useEffect(() => {
         commentsData();
     }, []);
+
     return (
         <div>
             {

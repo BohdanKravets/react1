@@ -7,16 +7,16 @@ export default function CommentDetails(props) {
 
     const commentData = async () => {
         const resp = await getComments();
-        const findedComment = resp.data.find(item => item.id === +id)
+        const findedComment = await resp.data.find(item => item.id === +id)
         setComment(findedComment)
     }
 
     useEffect(() => {
        commentData();
-    }, [])
+    }, [id]);
+
     return (
         <div>
-
             {comment && <div>{comment.body}</div>}
         </div>
     );

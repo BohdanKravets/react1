@@ -1,22 +1,31 @@
 import {useEffect, useState} from 'react';
+import {axiosInstance} from "../../services/api";
+import {useParams} from 'react-router-dom'
 
-export default function UserDetails(props) {
-    let {match: {params: {id}}} = props;
-
+export default function UserDetails() {
+    let params = useParams();
     let [user, setUser] = useState(null);
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users/' + id)
-            .then(value => value.json())
-            .then(value => {
-                setUser(value);
-            });
 
-    }, [id]);
+    const userData = async () => {
+        const resp = await axiosInstance.get('/users/' + params.id);
+        setUser(resp.data)
+    }
+
+    useEffect(() => {
+       userData();
+
+    }, [params.id]);
 
     return (
         <div>
-            {JSON.stringify(user)}
-
+            {
+                user &&
+                    <div>
+                        <hr/>
+                        <h3>{user.id} - {user.name} -{user.username}</h3>
+                        <div>Address: {user.address.city} - {user.email} - {user.phone} </div>
+                    </div>
+            }
         </div>
     );
 }
