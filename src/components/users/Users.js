@@ -11,12 +11,15 @@ export default function Users(props) {
     let url = props.location.search.slice(0, 6) + counter;
     const previous = (counter) => {
         if (counter > 1) {
+            props.location.search= props.location.search.slice(0, 6) + counter;
             setCounter(--counter)
+
         }
     }
 
     const next = (counter) => {
         if ((counter) < totalPages) {
+            props.location.search= props.location.search.slice(0, 6) + counter;
             setCounter(++counter)
         }
 
@@ -44,13 +47,13 @@ export default function Users(props) {
 
             }
             <div>
-                <Link to={{pathname: '/users', search: url}}>
-                <button onClick={() => previous(counter)}>back</button>
-                </Link>
 
-                <Link to={{pathname: '/users', search: url}}>
+                <button onClick={() => previous(counter)}>back</button>
+
+
+
                     <button onClick={() => next(counter)}>next</button>
-                </Link>
+
 
             </div>
 
