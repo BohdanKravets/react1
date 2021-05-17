@@ -1,0 +1,59 @@
+import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
+
+export default function Users(props) {
+
+    console.log(props)
+    let [usersData, setUsersData] = useState([]);
+    let [counter, setCounter] = useState(1);
+    let [totalPages, setTotalPages] = useState(0);
+
+    let url = props.location.search.slice(0, 6) + counter;
+    const previous = (counter) => {
+        if (counter > 1) {
+            setCounter(--counter)
+        }
+    }
+
+    const next = (counter) => {
+        if ((counter) < totalPages) {
+            setCounter(++counter)
+        }
+
+    }
+
+
+    console.log(url)
+    useEffect(() => {
+        fetch('https://reqres.in/api/users' + url)
+            .then(value => value.json())
+            .then(value => {
+                setUsersData(value.data)
+                setTotalPages(value.total_pages)
+            })
+    }, [counter])
+
+    console.log(usersData)
+    console.log(totalPages)
+    return (
+        <div>
+            {
+                usersData && usersData.map(value => <div>
+                    {value.email}
+                </div>)
+
+            }
+            <div>
+                <Link to={{pathname: '/users', search: url}}>
+                <button onClick={() => previous(counter)}>back</button>
+                </Link>
+
+                <Link to={{pathname: '/users', search: url}}>
+                    <button onClick={() => next(counter)}>next</button>
+                </Link>
+
+            </div>
+
+        </div>
+    );
+}
