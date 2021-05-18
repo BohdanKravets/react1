@@ -17,7 +17,7 @@ export default function Posts() {
                 <Route path={'/posts/:id'} component={PostComments}/>
 
             </Switch>
-<hr/>
+
             {
                 posts.map(value =>
                     <Post

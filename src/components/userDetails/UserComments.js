@@ -10,7 +10,7 @@ export default function UserComments(props) {
             .then(value => setPosts(value))
     },[user.id])
 
-    console.log(posts);
+
     return (
         <div>
             <h2>{user.id}. {user.name}</h2>
@@ -19,6 +19,7 @@ export default function UserComments(props) {
                 <div key ={value.id}>{value.id}. {value.title}}</div>
                 )
             }
+            <hr/>
         </div>
     );
 }

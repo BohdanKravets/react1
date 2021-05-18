@@ -17,7 +17,7 @@ export default function Users() {
             <Switch>
                 <Route path={'/users/:id'} component={UserComments}/>
             </Switch>
-<hr/>
+
             {
                 users.map(value =>
                     <User

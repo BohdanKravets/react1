@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 
 export default function PostComments(props) {
-    console.log(props)
     const {location: {state: post}} = props;
     let [comments,setComments] = useState([]);
     useEffect(() => {
@@ -11,15 +10,15 @@ export default function PostComments(props) {
             .then(value => setComments(value))
     },[post.id])
 
-    console.log(comments);
     return (
         <div>
             <h2>{post.id}. {post.title}</h2>
             {
                 comments.map(value =>
-                    <div key={value.id}>{value.id}. {value.name}}</div>
+                    <div key={value.id}>{value.id}. {value.name}</div>
                 )
             }
+            <hr/>
         </div>
     );
 }
