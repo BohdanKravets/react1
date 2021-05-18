@@ -7,7 +7,7 @@ import {
     from 'react-router-dom'
 import Home from "./components/home/Home";
 import Users from "./components/users/Users";
-
+import UserDetails from "./components/userDetails/UserDetails";
 
 
 export default function App() {
@@ -21,9 +21,8 @@ export default function App() {
 
                 <Switch>
                     <Route exact path={'/'} component={Home}/>
-                    <Route path={'/users'} component={Users}/>
-
-
+                    <Route exact path={'/users'} component={Users}/>
+                    <Route path={'/users?page=:id/:id'} component={UserDetails}/>
                 </Switch>
             </div>
         </Router>

@@ -1,60 +1,39 @@
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-
-export default function Users(props) {
-
-    console.log(props)
-    let [usersData, setUsersData] = useState([]);
-    let [counter, setCounter] = useState(1);
-    let [totalPages, setTotalPages] = useState(0);
-
-    let url = props.location.search.slice(0, 6) + counter;
-    const previous = (counter) => {
-        if (counter > 1) {
-            props.location.search= props.location.search.slice(0, 6) + counter;
-            setCounter(--counter)
-
-        }
-    }
-
-    const next = (counter) => {
-        if ((counter) < totalPages) {
-            props.location.search= props.location.search.slice(0, 6) + counter;
-            setCounter(++counter)
-        }
-
-    }
+import User from "../user/User";
 
 
-    console.log(url)
+export default function Users({location:{search,pathname}}) {
+
+
+    let [usersData, setUsersData] = useState(null);
+
+
+    let counter = +search.slice(6);
+let url = pathname +search;
     useEffect(() => {
-        fetch('https://reqres.in/api/users' + url)
+        fetch('https://reqres.in/api'+ url)
             .then(value => value.json())
             .then(value => {
-                setUsersData(value.data)
-                setTotalPages(value.total_pages)
+                setUsersData(value)
             })
     }, [counter])
 
-    console.log(usersData)
-    console.log(totalPages)
+
     return (
         <div>
             {
-                usersData && usersData.map(value => <div>
-                    {value.email}
-                </div>)
+                usersData && usersData.data.map(value =>
+                <User key ={value.id} item = {value} url ={url}/>)
 
             }
-            <div>
-
-                <button onClick={() => previous(counter)}>back</button>
-
-
-
-                    <button onClick={() => next(counter)}>next</button>
+            <div className={'button'}>
+                <Link to={{pathname: pathname,
+                    search: `?page=${counter > 1 ? counter - 1 : counter}`}}>back </Link>
 
 
+                <Link to={{pathname: pathname,
+                    search: `?page=${counter < 2 ? counter + 1 : counter}`}}>next</Link>
             </div>
 
         </div>
