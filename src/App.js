@@ -8,7 +8,9 @@ import Home from "./components/home/Home";
 import Users from "./components/users/Users";
 import Posts from "./components/posts/Posts";
 
-
+// Головна сторінка має лінки на сторінки з юзерами та постами з jsonplaceholer.
+//     При кліку на лінку юзерс відбувається перехід на сторінку зі всіма юзерами. В кожного юзера є кнопка-лінка, при кліку на яку відображаються всі тільки його пости.
+//     Та сама ситуація з постами, тільки при кліку на окремий пост відображається коментарі цього поста
 export default function App() {
     return (
         <Router>
