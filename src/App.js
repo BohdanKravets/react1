@@ -21,7 +21,7 @@ const ToDos = () => {
                     todos.map((value, index) => <div>{value}
                         <button onClick={() => {
                             dispatch({type: 'DELETE', payload: index})
-                        }}> delete
+                        }}>   delete
                         </button>
 
                     </div>)
