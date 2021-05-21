@@ -1,14 +1,16 @@
 import {useSelector, useDispatch} from 'react-redux'
 import {useState} from "react";
+import './App.css'
 
 const ToDos = () => {
     const todos = useSelector(state => state.todos)
     const dispatch = useDispatch();
-    const [value, setValue] = useState('')
+    const [value, setValue] = useState({value: '', status: false})
+
     return (
         <div>
-            <input type="text" value={value} onChange={({target: {value}}) => {
-                setValue(value)
+            <input type="text" value={value.value} onChange={({target: {value}}) => {
+                setValue({value: value, status: false})
             }
             }/>
             <button onClick={() => {
@@ -18,10 +20,15 @@ const ToDos = () => {
             </button>
             <div>
                 {
-                    todos.map((value, index) => <div>{value}
+                    todos.map((item, index) => <div><span>
+                        {item.value}</span>
+
+                        <input type="checkbox" name="ckeckbox" onChange={({target: {checked}}) => {
+                            dispatch({type: 'DONE', payload: {index:index, data: {value: item, status: checked}}})
+                        }}/>
                         <button onClick={() => {
                             dispatch({type: 'DELETE', payload: index})
-                        }}>   delete
+                        }}> delete
                         </button>
 
                     </div>)

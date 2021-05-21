@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import {createStore} from 'redux';
 import  {Provider} from 'react-redux';
 
+
 const initialState = {
     todos:[]
 }
@@ -19,6 +20,9 @@ switch (action.type) {
     case 'DELETE':{
         return {...state,todos:[...state.todos.slice(0,action.payload),...state.todos.slice(action.payload+1)]}
     }
+    case 'DONE':{
+        return {...state,todos:[...state.todos.slice(0,action.payload.index),action.payload.data,...state.todos.slice(action.payload.index+1)]}
+    }
     default:
         return state;
 }
@@ -27,7 +31,9 @@ switch (action.type) {
 
 const store = createStore(reducer);
 
-
+store.subscribe((state) => {
+    console.log(store.getState())
+})
 
 
 
