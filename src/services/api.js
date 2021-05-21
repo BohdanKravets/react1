@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from 'axios'
 
 const axiosInstance = axios.create({
-    baseURL: "https://jsonplaceholder.typicode.com/posts"
+    baseURL: 'https://jsonplaceholder.typicode.com'
 });
 
-const getposts = async () => {
-  const resp =  await axiosInstance.get('/posts');
-}
 
-export {getposts};
+const getPosts = () => axiosInstance.get('/posts');
+
+
+export {axiosInstance,  getPosts};

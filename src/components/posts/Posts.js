@@ -1,16 +1,36 @@
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {useEffect} from "react";
-import {getposts} from "../../services/api";
+import {getPosts} from "../../services/api";
+import {START_POST_LOADING, STOP_POST_LOADING, SET_POSTS} from '../../redux'
+import Post from "../post/Post";
+
 
 export default function Posts() {
-    const store = useSelector((state)=>state);
-useEffect({
+    const postsData = useSelector((state) => state);
+    console.log(postsData)
+    const dispatch = useDispatch();
+    const postsFetcher = async () => {
+        try {
+            const resp = await getPosts();
+            dispatch({type: SET_POSTS, payload: resp.data})
+        } catch (e) {
+            console.log(e)
+        }
 
-},[])
+    }
 
-    return(
+    useEffect(() => {
+        postsFetcher();
+    }, [])
+
+    return (
         <div>
-Posts
+            {
+                postsData.posts.map(value => <Post
+                    key={value.id}
+                    item={value}
+                />)
+            }
         </div>
     );
 }

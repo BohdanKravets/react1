@@ -1,0 +1,3 @@
+export const START_POST_LOADING = 'START_POST_LOADING'
+export const STOP_POST_LOADING = 'STOP_POST_LOADING'
+export const SET_POSTS = 'SET_POSTS'
