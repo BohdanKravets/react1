@@ -1,28 +1,42 @@
 import {useSelector, useDispatch} from 'react-redux';
 import {useEffect} from "react";
 import {getPosts} from "../../services/api";
-import {START_POST_LOADING, STOP_POST_LOADING, SET_POSTS} from '../../redux'
+import {setPosts,startPostsLoading,stopPostsLoading,setPostsError} from '../../redux'
 import Post from "../post/Post";
+import LoadingScreen from "../loadingScreen/LoadingScreen";
+import ErrorScreen from "../errorScreen/ErrorScreen";
 
 
 export default function Posts() {
-    const postsData = useSelector((state) => state);
-    console.log(postsData)
+    const postsData = useSelector(({posts}) => posts);
     const dispatch = useDispatch();
+
     const postsFetcher = async () => {
         try {
+            dispatch(startPostsLoading());
             const resp = await getPosts();
-            dispatch({type: SET_POSTS, payload: resp.data})
+            dispatch(setPosts(resp.data));
         } catch (e) {
-            console.log(e)
+            dispatch(setPostsError('Failed to fetch data from posts'));
+            console.log(e);
+        } finally {
+            dispatch(stopPostsLoading());
         }
 
     }
 
     useEffect(() => {
+        console.log('posts')
         postsFetcher();
-    }, [])
+    }, []);
 
+    if (postsData.isPostsLoading) {
+        return <LoadingScreen data ={'Posts'}/>
+
+    }
+    if(postsData.postsError){
+        return <ErrorScreen error ={postsData.postsError}/>
+    }
     return (
         <div>
             {
