@@ -1,0 +1,19 @@
+.menu{
+    display: flex;
+    background-color: blueviolet;
+}
+.menu a {
+    height: 90%;
+    width: 90px;
+    border: solid 2px aqua;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 2px 5px;
+    text-align: center;
+    text-decoration: none;
+    color:white;
+    background-color: cornflowerblue;
+}
+.menu a:hover{
+    background-color: chocolate;
+}
