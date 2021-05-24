@@ -1,0 +1,13 @@
+.flex {
+    display: flex;
+    align-items: center;
+}
+header.flex  {
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+div.flex h3{
+    margin: 0 10px;
+}
+
